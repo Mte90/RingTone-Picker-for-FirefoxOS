@@ -1,13 +1,7 @@
-CustomFirefoxOSRingtones
+RingTone-Picker-for-FirefoxOS 
 ========================
 
-A FirefoxOS app that demonstrates how to handle the "pick" activity to
-provide new ringtones for the system.
-
-To try it out, you'll need a FirefoxOS device running version 1.2 or
-later of the operating system.  To install this app, visit
-http://git.io/djf using the FirefoxOS browser app and click on the
-Install button you see there.
+A FirefoxOS app for set a custom ringtone on Firefox OS < 1.3
 
 This is a "system" app, so you won't see an icon on the homescreen
 when you install it.  After installing, open the Settings app and
