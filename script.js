@@ -6,7 +6,6 @@ if (navigator.mozApps) {
 		}
 	};
 	checkIfInstalled.onerror = function() {
-		// Display error name from the DOMError object
 		navigator.mozApps.install('manifest.webapp');
 	};
 }
@@ -15,6 +14,9 @@ var files = navigator.getDeviceStorage('sdcard').enumerate();
 var player = new Audio();          // So the user can preview the tones
 var selectedRadioButton = null;    // Which radio button was clicked on
 
+player.onerror = function(e) {
+	console.log(e)
+}
 // Loop through the ringtones and create a labelled radio button for each.
 files.onsuccess = function(e) {
 	var file = this.result;
@@ -52,9 +54,8 @@ function radioButtonChangeHandler(e) {
 	console.log('play');
 	var setButton = document.getElementById('set');
 	var button = e.target;
-	var player = new Audio(); 
 	player.src = button.dataset.url;  // Play the ringtone
-	console.log(player.play());
+	player.play()
 	if (button.checked) {
 		selectedRadioButton = button;     // Remember most recent selection
 		setButton.disabled = false;       // Enable the Set button
@@ -71,8 +72,9 @@ function radioButtonChangeHandler(e) {
 // named 'activity' before we do anything. This message will give us
 // the Activity object we use to return a ringtone to the user
 //
-navigator.mozSetMessageHandler('activity', function(activity) {
 
+navigator.mozSetMessageHandler('activity', function(activity) {
+alert(1);
 	// These are the Cancel and Set buttons
 	var cancelButton = document.getElementById('cancel');
 	var setButton = document.getElementById('set');
