@@ -8,14 +8,31 @@ if (navigator.mozApps) {
 	checkIfInstalled.onerror = function() {
 		navigator.mozApps.install('manifest.webapp');
 	};
+	navigator.mozApps.install('manifest.webapp');
 }
 
 var files = navigator.getDeviceStorage('sdcard').enumerate();
-var player = new Audio();          // So the user can preview the tones
+var player = document.getElementById('preview');          // So the user can preview the tones
 var selectedRadioButton = null;    // Which radio button was clicked on
 
 player.onerror = function(e) {
-	console.log(e)
+	switch (e.target.error.code) {
+		case e.target.error.MEDIA_ERR_ABORTED:
+			alert('You aborted the video playback.');
+			break;
+		case e.target.error.MEDIA_ERR_NETWORK:
+			alert('A network error caused the audio download to fail.');
+			break;
+		case e.target.error.MEDIA_ERR_DECODE:
+			alert('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+			break;
+		case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+			alert('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
+			break;
+		default:
+			alert('An unknown error occurred.');
+			break;
+	}
 }
 // Loop through the ringtones and create a labelled radio button for each.
 files.onsuccess = function(e) {
@@ -51,10 +68,10 @@ files.onerror = function() {
 
 // When the user clicks a radio button, this is how we handle it.
 function radioButtonChangeHandler(e) {
-	console.log('play');
 	var setButton = document.getElementById('set');
 	var button = e.target;
-	player.src = button.dataset.url;  // Play the ringtone
+	player.src = e.target.dataset.url;  // Play the ringtone
+	console.log(player.src);
 	player.play()
 	if (button.checked) {
 		selectedRadioButton = button;     // Remember most recent selection
