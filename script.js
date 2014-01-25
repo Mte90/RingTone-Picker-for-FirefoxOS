@@ -31,7 +31,7 @@ files.onsuccess = function(e) {
     radioButton.type = 'radio';
     radioButton.name = 'ringtones';
     radioButton.dataset.blob = URL.createObjectURL(file); // Store ringtone blob in a data attribute
-    radioButton.dataset.name = file.name.replace(/^.*[\\\/]/, '').split('.').pop(); // Ditto for ringtone name.
+    radioButton.dataset.name = file.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
     label.appendChild(document.createTextNode(radioButton.dataset.name));
     label.appendChild(radioButton);
 
@@ -54,12 +54,13 @@ files.onerror = function() {
 // When the user clicks a radio button, this is how we handle it.
 function radioButtonChangeHandler(e) {
   var setButton = document.getElementById('set');
-  player.type = "video/ogg"; //Set MimeType
+  player.type = "audio/ogg"; //Set MimeType
   player.src = e.target.dataset.blob; //Set the blob for the player
   player.play();// Play the ringtone
   setButton.disabled = false; // Enable the Set button
   selectedRadioButton = e.target.dataset;
 }
+
 // This app has role="system" in the manifest and has no launch_path
 // property in the manifest. This means that the user will not see it
 // on the homescreen and it can not be launched like an ordinary app.
@@ -86,10 +87,17 @@ navigator.mozSetMessageHandler('activity', function(activity) {
   // If the user clicks the Set button, we get the ringtone audio file
   // as a Blob and pass it and the ringtone name back to the invoking app.
   setButton.onclick = function() {
-    activity.postResult({// We post it to the invoking app
-      blob: selectedRadioButton.blob,
-      name: selectedRadioButton.name
-    });
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', selectedRadioButton.blob);
+    xhr.responseType = 'blob'; // We want the result as a Blob.
+    xhr.overrideMimeType('audio/ogg'); // Important! Set Blob type correctly.
+    xhr.send();
+    xhr.onload = function() { // When we get the blob
+      activity.postResult({ // We post it to the invoking app
+        blob: xhr.response,
+        name: selectedRadioButton.name
+      });
+    };
   };
 
 });
