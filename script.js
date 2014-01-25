@@ -1,4 +1,4 @@
-if (navigator.mozApps) {
+/*if (navigator.mozApps) {
   var checkIfInstalled = navigator.mozApps.getSelf();
   checkIfInstalled.onsuccess = function() {
     if (!checkIfInstalled.result) {
@@ -8,12 +8,11 @@ if (navigator.mozApps) {
   checkIfInstalled.onerror = function() {
     navigator.mozApps.install('manifest.webapp');
   };
-  navigator.mozApps.install('manifest.webapp');
-}
+}*/
 
 var files = navigator.getDeviceStorage('sdcard').enumerate();
-var player = document.getElementById('preview');          // So the user can preview the tones
-var selectedRadioButton = null;    // Which radio button was clicked on
+var player = new Audio();  // So the user can preview the tones
+var selectedRadioButton = null;  // Which radio button was clicked on
 
 player.onerror = function(e) {
   switch (e.target.error.code) {
@@ -33,16 +32,17 @@ player.onerror = function(e) {
       alert('An unknown error occurred.');
       break;
   }
-}
+};
 // Loop through the ringtones and create a labelled radio button for each.
-files.onsuccess = function(e) {
+files.onsuccess = function() {
   var file = this.result;
   if (file != null && file.name.split('.').pop() === 'ogg') {
     var label = document.createElement('label');
     var radioButton = document.createElement('input');
     radioButton.type = 'radio';
     radioButton.name = 'ringtones';
-    radioButton.dataset.url = file.name;   // Store ringtone url in a data attribute
+    radioButton.dataset.blob = URL.createObjectURL(file); // Store ringtone blob in a data attribute
+    URL.revokeObjectURL(e.target.dataset.blob); //Free memory
     radioButton.dataset.name = file.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
     label.appendChild(document.createTextNode(radioButton.dataset.name));
     label.appendChild(radioButton);
@@ -61,44 +61,20 @@ files.onsuccess = function(e) {
   if (!this.done) {
     this.continue();
   }
-}
+};
 files.onerror = function() {
   console.warn("No file found: " + this.error);
-}
+};
 
 // When the user clicks a radio button, this is how we handle it.
 function radioButtonChangeHandler(e) {
   var setButton = document.getElementById('set');
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', e.target.dataset.url);
-  xhr.responseType = 'blob';
-  xhr.send();
-  xhr.onload = function() {
-    videoblob = new Blob([xhr.response], {type: 'video/ogg'});
-    var openingVideo = new MozActivity({
-      name: "open",
-      data: {
-        type: [
-          "video/webm",
-          "video/mp4",
-          "video/3gpp",
-          "video/mkv",
-          "video/ogg"
-        ],
-        blob: videoblob
-      }
-    });
-    player.src = videoblob;  // Play the ringtone
-    player.play()
-  };
-  xhr.onerror = function() {
-    console.log('Error loading test video', xhr.error.name);
-  };
-  
-  if (button.checked) {
-    selectedRadioButton = button;     // Remember most recent selection
-    setButton.disabled = false;       // Enable the Set button
-  }
+  player.type = "video/ogg"; //Set MimeType
+  player.src = e.target.dataset.blob; //Set the blob for the player
+  player.play();// Play the ringtone
+  URL.revokeObjectURL(e.target.dataset.blob);
+  setButton.disabled = false; // Enable the Set button
+  selectedRadioButton = e.target.dataset;
 }
 //
 // This app has role="system" in the manifest and has no launch_path
@@ -131,17 +107,9 @@ navigator.mozSetMessageHandler('activity', function(activity) {
   // If the user clicks the Set button, we get the ringtone audio file
   // as a Blob and pass it and the ringtone name back to the invoking app.
   function setHandler() {
-    // This is a normal XHR, but it gets data from within our packaged app.
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', selectedRadioButton.dataset.url);
-    xhr.responseType = 'blob';         // We want the result as a Blob.
-    xhr.overrideMimeType('audio/ogg'); // Important! Set Blob type correctly.
-    xhr.send();
-    xhr.onload = function() {          // When we get the blob
       activity.postResult({// We post it to the invoking app
-        blob: xhr.response,
-        name: selectedRadioButton.dataset.name
+        blob: selectedRadioButton.blob,
+        name: selectedRadioButton.name
       });
-    }
   }
 });
