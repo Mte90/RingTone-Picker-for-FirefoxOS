@@ -1,5 +1,5 @@
 {
-  "name": "RingTone Picker for Firefox OS",
+  "name": "RingTone Picker",
   "type" : "privileged",
   "version": 1,
   "role": "system",
