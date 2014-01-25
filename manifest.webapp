@@ -1,23 +1,28 @@
 {
   "name": "RingTone Picker for Firefox OS",
-  "launch_path": "/index.html",
+  "type" : "privileged",
   "version": 1,
- "role": "system",
+  "role": "system",
   "developer": {
-    "name": "Daniele Scasciafratte",
+    "name": "Daniele Scasciafratte alias Mte90",
     "url": "http://mte90.net"
   },
   "default_locale": "en",
-  "type": "privileged",
   "permissions": {
-         "device-storage:sdcard": { "access": "readonly" }
-   },
-"installs_allowed_from": ["*"],
+    "device-storage:sdcard": {
+      "access": "readonly"
+    }
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
   "activities": {
     "pick": {
       "filters": {
-        "type": ["ringtone"]
-       },
+        "type": [
+          "ringtone"
+        ]
+      },
       "disposition": "inline",
       "returnValue": true,
       "href": "/index.html"
