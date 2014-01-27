@@ -1,6 +1,6 @@
 {
-  "name": "RingTone Picker for Firefox OS",
-  "description": "Set as ringtone your ogg files present on sd card!",
+  "name": "RingTone Picker",
+  "description": "Set as ringtone your ogg files present on sd card!Only for Firefox OS 1.2+",
   "type" : "privileged",
   "version": "1.0",
   "role": "system",
