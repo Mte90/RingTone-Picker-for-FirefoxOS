@@ -2,8 +2,9 @@
   "name": "RingTone Picker for Firefox OS",
   "description": "Set as ringtone your ogg files present on sd card!",
   "type" : "privileged",
-  "version": 1,
+  "version": "1.0",
   "role": "system",
+  "launch_path": "/index.html",
   "developer": {
     "name": "Daniele Scasciafratte alias Mte90",
     "url": "http://mte90.net"
@@ -11,7 +12,8 @@
   "default_locale": "en",
   "permissions": {
     "device-storage:sdcard": {
-      "access": "readonly"
+      "access": "readonly",
+      "description": "Required for get a list of audio files on the sdcard"
     }
   },
   "installs_allowed_from": [
