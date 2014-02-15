@@ -25,6 +25,7 @@ player.onerror = function(e) {
 // Loop through the ringtones and create a labelled radio button for each.
 files.onsuccess = function(e) {
   var file = this.result;
+  //if (file != null && (file.name.split('.').pop() === 'ogg' || file.name.split('.').pop() === 'mp3')) {
   if (file != null && file.name.split('.').pop() === 'ogg') {
     var label = document.createElement('label');
     var radioButton = document.createElement('input');
@@ -32,6 +33,7 @@ files.onsuccess = function(e) {
     radioButton.name = 'ringtones';
     radioButton.dataset.blob = URL.createObjectURL(file); // Store ringtone blob in a data attribute
     radioButton.dataset.name = file.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
+    radioButton.dataset.mimetype = 'audio/' + file.name.split('.').pop(); //Set the mimetype
     label.appendChild(document.createTextNode(radioButton.dataset.name));
     label.appendChild(radioButton);
 
@@ -54,7 +56,7 @@ files.onerror = function() {
 // When the user clicks a radio button, this is how we handle it.
 function radioButtonChangeHandler(e) {
   var setButton = document.getElementById('set');
-  player.type = "audio/ogg"; //Set MimeType
+  player.type = e.target.dataset.mimetype; //Set MimeType
   player.src = e.target.dataset.blob; //Set the blob for the player
   player.play();// Play the ringtone
   setButton.disabled = false; // Enable the Set button
@@ -90,7 +92,7 @@ navigator.mozSetMessageHandler('activity', function(activity) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', selectedRadioButton.blob);
     xhr.responseType = 'blob'; // We want the result as a Blob.
-    xhr.overrideMimeType('audio/ogg'); // Important! Set Blob type correctly.
+    xhr.overrideMimeType(selectedRadioButton.mimetype); // Important! Set Blob type correctly.
     xhr.send();
     xhr.onload = function() { // When we get the blob
       activity.postResult({ // We post it to the invoking app
