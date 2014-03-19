@@ -1,7 +1,7 @@
 RingTone-Picker-for-FirefoxOS 
 ========================
 
-A FirefoxOS app for set a custom ringtone on Firefox OS > 1.2
+A FirefoxOS app for set a custom ringtone (ogg file) on Firefox OS > 1.2
 
 This is a "system" app, so you won't see an icon on the homescreen when you install it.  
 After installing, open the Settings app and click on Sound.  

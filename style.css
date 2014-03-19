@@ -69,3 +69,7 @@ button {
     height: 35px;
     font-size: 20px;
 }
+
+#alert {
+	text-align: center;
+}

@@ -37,6 +37,9 @@ files.onsuccess = function(e) {
     label.appendChild(document.createTextNode(radioButton.dataset.name));
     label.appendChild(radioButton);
 
+    //Hide the alert
+    var alert_ = document.getElementById('alert');
+    alert_.style.display = 'none';
     // We'll list the ringtones inside this element
     var container = document.getElementById('ringtones');
     container.appendChild(label);
