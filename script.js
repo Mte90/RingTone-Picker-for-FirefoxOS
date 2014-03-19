@@ -1,6 +1,19 @@
 var files = navigator.getDeviceStorage('sdcard').enumerate();
 var player = new Audio();  // So the user can preview the tones
 var selectedRadioButton = null;  // Which radio button was clicked on
+var alert_ = document.getElementById('alert'); //message alert
+var setButton = document.getElementById('set');
+
+if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+  var ffversion = new Number(RegExp.$1) //gets browser version
+  //Gecko 26 it'us used in Firefox 1.2 so the prior version not working
+  if (ffversion < 26) {
+    setButton.style.display = 'none';
+    document.getElementById('cancel').style.display = 'none';
+    alert_.innerHTML = 'This app not work with your version of Firefox OS!<br/>Upgrade your phone!';
+    throw new Error('This is not an error. This is just to abort javascript');
+  }
+}
 
 player.onerror = function(e) {
   switch (e.target.error.code) {
@@ -38,7 +51,6 @@ files.onsuccess = function(e) {
     label.appendChild(radioButton);
 
     //Hide the alert
-    var alert_ = document.getElementById('alert');
     alert_.style.display = 'none';
     // We'll list the ringtones inside this element
     var container = document.getElementById('ringtones');
@@ -58,7 +70,6 @@ files.onerror = function() {
 
 // When the user clicks a radio button, this is how we handle it.
 function radioButtonChangeHandler(e) {
-  var setButton = document.getElementById('set');
   player.type = e.target.dataset.mimetype; //Set MimeType
   player.src = e.target.dataset.blob; //Set the blob for the player
   player.play();// Play the ringtone
@@ -88,7 +99,7 @@ navigator.mozSetMessageHandler('activity', function(activity) {
   cancelButton.onclick = function() {
     activity.postError('canceled');
   };
-  
+
   // If the user clicks the Set button, we get the ringtone audio file
   // as a Blob and pass it and the ringtone name back to the invoking app.
   setButton.onclick = function() {
@@ -98,7 +109,7 @@ navigator.mozSetMessageHandler('activity', function(activity) {
     xhr.overrideMimeType(selectedRadioButton.mimetype); // Important! Set Blob type correctly.
     xhr.send();
     xhr.onload = function() { // When we get the blob
-      activity.postResult({ // We post it to the invoking app
+      activity.postResult({// We post it to the invoking app
         blob: xhr.response,
         name: selectedRadioButton.name
       });
