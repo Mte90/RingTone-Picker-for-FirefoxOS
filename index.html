@@ -2,19 +2,24 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css"/>
+
+		<link rel="resource" type="application/l10n" href="locales/locales.ini" />
+		<script type="application/javascript" src="l10n.js"></script>
+		<base target="_blank">
+
 		<script defer src="script.js"></script>
 	</head>
 	<body>
-		<h1 id="title">Pick your Ringtone</h1>
+		<h1 id="title" data-l10n-id="title">Pick your Ringtone</h1>
+		<span class="alert" id="deprecated" data-l10n-id="deprecated">This app not work with your version of Firefox OS!<br/>Upgrade your phone!</span>
+		<span class="alert" id="permission" data-l10n-id="permission">Are you sure that this app have the correct permission for read the sd card?</span>
+		<span class="alert" id="ogg" data-l10n-id="ogg">Are you sure that there is some ogg audio file in the sd?</span>
+		<span class="alert" id="empty" data-l10n-id="empty">Your sd card is empty</span>
 		<div id="ringtones">
-			<div id="alert">
-				Are you sure that there is some ogg audio file in the sd?<br><br>
-				Are you sure that this app have the correct permission for read the sd card?
-			</div>
 		</div>
 		<div id="buttons">
-			<button id="cancel">Cancel</button>
-			<button id="set" disabled>Set</button>
+			<button id="cancel" data-l10n-id="cancel">Cancel</button>
+			<button id="set" disabled data-l10n-id="set">Set</button>
 		</div>
 	</body>
 </html>

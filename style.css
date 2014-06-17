@@ -1,34 +1,42 @@
 * { -moz-box-sizing: border-box; }
 
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-size: 24px;
-  background-color: #F4F4F4;
-  overflow: hidden;
-  font-family: "FiraSans" !important;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 24px;
+	background-color: #F4F4F4;
+	overflow: hidden;
+	font-family: "FiraSans" !important;
+}
+
+.alert {
+	display:none;
+	width: 100%;
+	text-align: center;
+	display: none;
+}
+
+#permission,#ogg {
+	display:block;
 }
 
 #title {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 0;
-  height: 50px;
-  font-size: 34px;
-  padding: 10px;
-  text-align: center;
-  color:#868692;
-  font-weight: lighter;
+	left: 0;
+	width: 100%;
+	top: 0;
+	font-size: 34px;
+	padding: 10px;
+	text-align: center;
+	color:#868692;
+	font-weight: lighter;
 }
 
 #ringtones {
     position: absolute;
     left: 0;
     width: 100%;
-    top: 50px;
     bottom: 50px;
     overflow-x: hidden;
     overflow-y: scroll;
