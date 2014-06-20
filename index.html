@@ -10,15 +10,39 @@
 		<script defer src="script.js"></script>
 	</head>
 	<body>
-		<h1 id="title" data-l10n-id="title">Pick your Ringtone</h1>
+		<header>
+			<button id="cancel"><</button>
+			<h1 id="title" data-l10n-id="title">Ringtone</h1>
+		</header>
 		<span class="alert" id="deprecated" data-l10n-id="deprecated">This app not work with your version of Firefox OS!<br/>Upgrade your phone!</span>
 		<span class="alert" id="permission" data-l10n-id="permission">Are you sure that this app have the correct permission for read the sd card?</span>
-		<span class="alert" id="ogg" data-l10n-id="ogg">Are you sure that there is some ogg audio file in the sd?</span>
+		<span class="alert" id="ogg" data-l10n-id="ogg">Are you sure that there are ogg files in the sd?</span>
 		<span class="alert" id="empty" data-l10n-id="empty">Your sd card is empty</span>
+		<div class="spinner">
+			<div class="wBall" id="wBall_1">
+				<div class="wInnerBall">
+				</div>
+			</div>
+			<div class="wBall" id="wBall_2">
+				<div class="wInnerBall">
+				</div>
+			</div>
+			<div class="wBall" id="wBall_3">
+				<div class="wInnerBall">
+				</div>
+			</div>
+			<div class="wBall" id="wBall_4">
+				<div class="wInnerBall">
+				</div>
+			</div>
+			<div class="wBall" id="wBall_5">
+				<div class="wInnerBall">
+				</div>
+			</div>
+		</div>
 		<div id="ringtones">
 		</div>
 		<div id="buttons">
-			<button id="cancel" data-l10n-id="cancel">Cancel</button>
 			<button id="set" disabled data-l10n-id="set">Set</button>
 		</div>
 	</body>

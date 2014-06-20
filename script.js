@@ -1,10 +1,17 @@
-var files = navigator.getDeviceStorage('sdcard').enumerate();
+var storages = navigator.getDeviceStorages('sdcard');
+
+if (storages.length === 1) {
+  var files = storages[0].enumerate();
+} else if (storages.length > 1) {
+  var files = storages[storages.length - 1].enumerate();
+}
+
 var player = new Audio();  // So the user can preview the tones
 var selectedRadioButton = null;  // Which radio button was clicked on
 var setButton = document.getElementById('set');
 
 if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
-  var ffversion = new Number(RegExp.$1) //gets browser version
+  var ffversion = new Number(RegExp.$1); //gets browser version
   //Gecko 26 it'us used in Firefox 1.2 so the prior version not working
   if (ffversion < 26) {
     setButton.style.display = 'none';
@@ -37,36 +44,48 @@ player.onerror = function(e) {
 };
 
 // Loop through the ringtones and create a labelled radio button for each
-files.onsuccess = function(e) {
+files.onsuccess = function() {
   var files = this.result;
-  if (files !== null && files.name.split('.').pop() === 'ogg') {
-    document.getElementById('ogg').style.display = 'none';
-    var label = document.createElement('label');
-    var radioButton = document.createElement('input');
-    radioButton.type = 'radio';
-    radioButton.name = 'ringtones';
-    radioButton.dataset.blob = URL.createObjectURL(files); // Store ringtone blob in a data attribute
-    radioButton.dataset.name = files.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
-    radioButton.dataset.mimetype = 'audio/' + files.name.split('.').pop(); //Set the mimetype
-    label.appendChild(document.createTextNode(radioButton.dataset.name));
-    label.appendChild(radioButton);
+  if (this.result) {
+    if (files !== null && files.name.split('.').pop() === 'ogg') {
+      document.getElementById('ogg').style.display = 'none';
+      var label = document.createElement('label');
+      var radioButton = document.createElement('input');
+      radioButton.type = 'radio';
+      radioButton.name = 'ringtones';
+      radioButton.dataset.blob = URL.createObjectURL(files); // Store ringtone blob in a data attribute
+      radioButton.dataset.name = files.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
+      radioButton.dataset.mimetype = 'audio/' + files.name.split('.').pop(); //Set the mimetype
+      var text = document.createElement('span');
+      text.innerHTML = radioButton.dataset.name;
+      label.appendChild(text);
+      label.appendChild(radioButton);
 
-    // We'll list the ringtones inside this element
-    var container = document.getElementById('ringtones');
-    container.appendChild(label);
-    // Each radio button has this event handler.
-    radioButton.onchange = radioButtonChangeHandler;
-  }
+      // We'll list the ringtones inside this element
+      var container = document.getElementById('ringtones');
+      container.appendChild(label);
+      // Each radio button has this event handler.
+      radioButton.onchange = radioButtonChangeHandler;
+    }
 
-  this.done = false;
-
-  if (!this.done) {
     this.continue();
+
+  } else {
+    var child = document.getElementById('ringtones').childElementCount;
+    if (child > 0) {
+      var nodeList = document.querySelectorAll('.alert');
+      for (var i = 0, length = nodeList.length; i < length; i++) {
+        nodeList[i].style.display = 'none';
+      }
+      document.querySelector('.spinner').style.display = 'none';
+    } else {
+      document.getElementById('ogg').style.display = 'block';
+    }
   }
 };
 
 files.onerror = function() {
-  document.getElementById('empty').style.display = 'block';
+  document.getElementById('ogg').style.display = 'none';
 };
 
 // When the user clicks a radio button, this is how we handle it.
