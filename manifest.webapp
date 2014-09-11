@@ -2,7 +2,7 @@
   "name": "RingTone Picker",
   "description": "Set as ringtone your ogg files present on sd card! Only for Firefox OS 1.2+",
   "type": "privileged",
-  "version": "1.2",
+  "version": "1.2.1",
   "role": "system",
   "launch_path": "/index.html",
   "developer": {
@@ -30,6 +30,28 @@
       "returnValue": true,
       "href": "/index.html"
     }
+  },
+  "locales": {
+	  "it": {
+		  "name": "Ringtone Picker",
+		  "description": "Imposta i tuoi file ogg nella scheda sd come suonerie! Solo per Firefox OS 1.2+"
+	  },
+	  "de": {
+		  "name": "Ringtone Picker",
+		  "description": "Wählen Sie ein .ogg-File von Ihrer SD-Karte als Klingelton. Nur für Firefox OS 1.2+"
+		  },
+	  "es": {
+		  "name": "Ringtone Picker",
+		  "description": "¡Asigna como tono de llamada tus archivos ogg presentes en la tarjeta sd! Solo para Firefox OS 1.2+"
+		  },
+	  "he": {
+		  "name": "בוחר הרינגטונים",
+		  "description": "קבע כרינגטון את קבצי ה- ogg שלך שעל כרטיס הזיכרון! רק ל- Firefox OS 1.2 ומעלה."
+		  },
+	  "ta": {
+		  "name": "Ringtone Picker",
+		  "description": "Set as ringtone your ogg files present on sd card! Only for Firefox OS 1.2+"
+		  }
   },
   "icons": {
     "60": "/icons/60.png",
