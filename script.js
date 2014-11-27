@@ -1,10 +1,5 @@
-var storages = navigator.getDeviceStorages('sdcard');
-
-if (storages.length === 1) {
-  var files = storages[0].enumerate();
-} else if (storages.length > 1) {
-  var files = storages[storages.length - 1].enumerate();
-}
+var storage = navigator.getDeviceStorage('music');
+var files = storage.enumerate();
 
 var player = new Audio();  // So the user can preview the tones
 var selectedRadioButton = null;  // Which radio button was clicked on

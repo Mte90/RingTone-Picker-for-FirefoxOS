@@ -11,7 +11,7 @@
   },
   "default_locale": "en",
   "permissions": {
-    "device-storage:sdcard": {
+    "device-storage:music": {
       "access": "readonly",
       "description": "Required for get the list of ogg files in the sdcard"
     }
