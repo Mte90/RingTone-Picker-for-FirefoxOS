@@ -51,6 +51,10 @@
 	  "ta": {
 		  "name": "Ringtone Picker",
 		  "description": "Set as ringtone your ogg files present on sd card! Only for Firefox OS 1.2+"
+		  },
+	  "fr": {
+		  "name": "Ringtone Picker",
+		  "description": "Choisissez votre sonnerie parmi les fichiers ogg présents sur votre carte SD! Seulement pour Firefox OS 1.2+"
 		  }
   },
   "icons": {
