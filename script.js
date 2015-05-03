@@ -5,7 +5,7 @@ if (storages.length === 1) {
 } else if (storages.length > 1) {
   var files = storages[storages.length - 1].enumerate();
 }
-
+console.log(files);
 var player = new Audio();  // So the user can preview the tones
 var selectedRadioButton = null;  // Which radio button was clicked on
 var setButton = document.getElementById('set');
@@ -53,7 +53,7 @@ files.onsuccess = function() {
       var radioButton = document.createElement('input');
       radioButton.type = 'radio';
       radioButton.name = 'ringtones';
-      radioButton.dataset.blob = URL.createObjectURL(files); // Store ringtone blob in a data attribute
+      radioButton.dataset.blob = window.URL.createObjectURL(files); // Store ringtone blob in a data attribute
       radioButton.dataset.name = files.name.replace(/^.*[\\\/]/, ''); // Ditto for ringtone name.
       radioButton.dataset.mimetype = 'audio/' + files.name.split('.').pop(); //Set the mimetype
       var text = document.createElement('span');
@@ -80,6 +80,8 @@ files.onsuccess = function() {
       document.querySelector('.spinner').style.display = 'none';
     } else {
       document.getElementById('ogg').style.display = 'block';
+      document.querySelector('.spinner').style.display = 'none';
+      document.querySelector('#set').style.display = 'none';
     }
   }
 };

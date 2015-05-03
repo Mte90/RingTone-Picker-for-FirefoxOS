@@ -34,6 +34,7 @@ header {
 	text-align: center;
 	color:#868692;
 	font-weight: lighter;
+	margin-left:-15px;
 }
 
 
@@ -42,7 +43,7 @@ header {
 	border:0;
 	float:left;
 	font-size: 2rem;
-	padding-left: 4px;
+	padding-left: 7px;
 	border-radius:0;
 	color:#00B8D6;
 }
@@ -94,7 +95,7 @@ button {
 }
 #set {
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.4rem;
 }
 
 #alert {
