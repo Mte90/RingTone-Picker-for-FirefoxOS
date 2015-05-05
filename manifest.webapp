@@ -1,94 +1,98 @@
 {
-   "name":"RingTone Picker",
-   "description":"Set as ringtone your ogg files present on sd card! Only for Firefox OS 1.2+",
-   "type":"privileged",
-   "version":"1.2.2",
-   "role":"system",
-   "launch_path":"/index.html",
-   "developer":{
-      "name":"Daniele 'Mte90' Scasciafratte",
-      "url":"http://mte90.net"
-   },
-   "default_locale":"en",
-   "permissions":{
-      "device-storage:sdcard":{
-         "access":"readonly",
-         "description":"Required for get the list of ogg files in the sdcard"
-      }
-   },
-   "installs_allowed_from":[
-      "*"
-   ],
-   "activities":{
-      "pick":{
-         "filters":{
-            "type":[
-               "ringtone"
-            ]
-         },
-         "disposition":"inline",
-         "returnValue":true,
-         "href":"/index.html"
-      }
-   },
-   "locales":{
-      "it":{
-         "name":"Ringtone Picker",
-         "description":"Imposta i tuoi file ogg nella scheda sd come suonerie! Solo per Firefox OS 1.2+"
+  "name": "RingTone Picker",
+  "description": "Set as ringtone your ogg files present on sd card! Only for Firefox OS 1.2+",
+  "type": "privileged",
+  "version": "1.2.2",
+  "role": "system",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Daniele 'Mte90' Scasciafratte",
+    "url": "http://mte90.net"
+  },
+  "default_locale": "en",
+  "permissions": {
+    "device-storage:sdcard": {
+      "access": "readonly",
+      "description": "Required for get the list of ogg files in the sdcard"
+    }
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "activities": {
+    "pick": {
+      "filters": {
+        "type": {
+          "value": [
+            "ringtone",
+            "alerttone"
+          ],
+          "required": true
+        }
       },
-      "de":{
-         "name":"Ringtone Picker",
-         "description":"Wählen Sie ein .ogg-File von Ihrer SD-Karte als Klingelton. Nur für Firefox OS 1.2+"
-      },
-      "es":{
-         "name":"Ringtone Picker",
-         "description":"¡Asigna como tono de llamada tus archivos ogg presentes en la tarjeta sd! Solo para Firefox OS 1.2+"
-      },
-      "he":{
-         "name":"בוחר הרינגטונים",
-         "description":"קבע כרינגטון את קבצי ה- ogg שלך שעל כרטיס הזיכרון! רק ל- Firefox OS 1.2 ומעלה."
-      },
-      "ta":{
-         "name":"Ringtone Picker",
-         "description":"SD அட்டையில் உள்ள ogg கோப்புகளை உங்கள் அழைப்பொலிகளாக வைக்கலாம்!\nFirefox OS 1.2+ மட்டும்"
-      },
-      "fr":{
-         "name":"Ringtone Picker",
-         "description":"Choisissez votre sonnerie parmi les fichiers ogg présents sur votre carte SD! Seulement pour Firefox OS 1.2+"
-      },
-      "nl":{
-         "name":"Beltoonkiezer",
-         "description":"Stel de OGG-bestanden, die op uw SD-kaart staan, in als beltoon! Alleen voor Firefox OS 1.2+"
-      },
-      "hi":{
-         "name":"रिंगटोन बीनने",
-         "description":"रिंगटोन के रूप में सेट अपने ogg एसडी कार्ड पर उपस्थित फाइलें! केवल फ़ायरफ़ॉक्स ओएस 1.2+ के लिए"
-      },
-      "el":{
-         "name":"RingTone Picker",
-         "description":"Επέλεξε για ήχο κλήσης ένα από τα αρχεία ogg που υπάρχουν στην κάρτα μνήμης σου! Μόνο για Firefox OS 1.2+"
-      },
-      "bn-IN":{
-         "name":"রিংটোন জুতো",
-         "description":"রিংটোন হিসেবে সেট করুন আপনার ogg এসডি কার্ড উপর বর্তমানে ফাইল! শুধুমাত্র ফায়ারফক্স ওএস 1.2+ জন্য"
-      },
-      "bn-BD":{
-         "name":"রিংটোন পিকার",
-         "description":"আপনার এসডি কার্ডে থাকা ogg ফাইলগুলোকে রিংটোন হিসেবে সেট করুন! শুধু Firefox OS 1.2 ও এর পরের সংস্করনের জন্য প্রযোজ্য"
-      },
-      "bn":{
-         "name":"রিংটোন পিকার",
-         "description":"রিংটোন হিসেবে আপনার এসডি কার্ড এর ogg ফাইল সেট করতে চান ! শুধুমাত্র ফায়ারফক্স ওএস 1.2+ এর জন্য"
-      },
-      "bg":{
-         "name":"Тон на звънене",
-         "description":"Задайте някой от „ogg“ файловете във Вашата SD карта памет като тон на звънене! Само за Файърфокс версия 1.2+"
-      }
-   },
-   "icons":{
-      "60":"/icons/60.png",
-      "90":"/icons/90.png",
-      "120":"/icons/120.png",
-      "128":"/icons/128.png"
-   }
+      "disposition": "inline",
+      "returnValue": true,
+      "href": "/index.html"
+    }
+  },
+  "locales": {
+    "it": {
+      "name": "Ringtone Picker",
+      "description": "Imposta i tuoi file ogg nella scheda sd come suonerie! Solo per Firefox OS 1.2+"
+    },
+    "de": {
+      "name": "Ringtone Picker",
+      "description": "Wählen Sie ein .ogg-File von Ihrer SD-Karte als Klingelton. Nur für Firefox OS 1.2+"
+    },
+    "es": {
+      "name": "Ringtone Picker",
+      "description": "¡Asigna como tono de llamada tus archivos ogg presentes en la tarjeta sd! Solo para Firefox OS 1.2+"
+    },
+    "he": {
+      "name": "בוחר הרינגטונים",
+      "description": "קבע כרינגטון את קבצי ה- ogg שלך שעל כרטיס הזיכרון! רק ל- Firefox OS 1.2 ומעלה."
+    },
+    "ta": {
+      "name": "Ringtone Picker",
+      "description": "SD அட்டையில் உள்ள ogg கோப்புகளை உங்கள் அழைப்பொலிகளாக வைக்கலாம்!\nFirefox OS 1.2+ மட்டும்"
+    },
+    "fr": {
+      "name": "Ringtone Picker",
+      "description": "Choisissez votre sonnerie parmi les fichiers ogg présents sur votre carte SD! Seulement pour Firefox OS 1.2+"
+    },
+    "nl": {
+      "name": "Beltoonkiezer",
+      "description": "Stel de OGG-bestanden, die op uw SD-kaart staan, in als beltoon! Alleen voor Firefox OS 1.2+"
+    },
+    "hi": {
+      "name": "रिंगटोन बीनने",
+      "description": "रिंगटोन के रूप में सेट अपने ogg एसडी कार्ड पर उपस्थित फाइलें! केवल फ़ायरफ़ॉक्स ओएस 1.2+ के लिए"
+    },
+    "el": {
+      "name": "RingTone Picker",
+      "description": "Επέλεξε για ήχο κλήσης ένα από τα αρχεία ogg που υπάρχουν στην κάρτα μνήμης σου! Μόνο για Firefox OS 1.2+"
+    },
+    "bn-IN": {
+      "name": "রিংটোন জুতো",
+      "description": "রিংটোন হিসেবে সেট করুন আপনার ogg এসডি কার্ড উপর বর্তমানে ফাইল! শুধুমাত্র ফায়ারফক্স ওএস 1.2+ জন্য"
+    },
+    "bn-BD": {
+      "name": "রিংটোন পিকার",
+      "description": "আপনার এসডি কার্ডে থাকা ogg ফাইলগুলোকে রিংটোন হিসেবে সেট করুন! শুধু Firefox OS 1.2 ও এর পরের সংস্করনের জন্য প্রযোজ্য"
+    },
+    "bn": {
+      "name": "রিংটোন পিকার",
+      "description": "রিংটোন হিসেবে আপনার এসডি কার্ড এর ogg ফাইল সেট করতে চান ! শুধুমাত্র ফায়ারফক্স ওএস 1.2+ এর জন্য"
+    },
+    "bg": {
+      "name": "Тон на звънене",
+      "description": "Задайте някой от „ogg“ файловете във Вашата SD карта памет като тон на звънене! Само за Файърфокс версия 1.2+"
+    }
+  },
+  "icons": {
+    "60": "/icons/60.png",
+    "90": "/icons/90.png",
+    "120": "/icons/120.png",
+    "128": "/icons/128.png"
+  }
 }

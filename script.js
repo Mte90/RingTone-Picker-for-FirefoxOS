@@ -1,3 +1,4 @@
+'use strict';
 var storages = navigator.getDeviceStorages('sdcard');
 
 if (storages.length === 1) {
@@ -5,7 +6,7 @@ if (storages.length === 1) {
 } else if (storages.length > 1) {
   var files = storages[storages.length - 1].enumerate();
 }
-console.log(files);
+
 var player = new Audio();  // So the user can preview the tones
 var selectedRadioButton = null;  // Which radio button was clicked on
 var setButton = document.getElementById('set');
@@ -23,7 +24,7 @@ if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
 
 document.getElementById('permission').style.display = 'none';
 
-player.onerror = function(e) {
+player.onerror = function (e) {
   switch (e.target.error.code) {
     case e.target.error.MEDIA_ERR_ABORTED:
       alert('You aborted the video playback.');
@@ -44,7 +45,7 @@ player.onerror = function(e) {
 };
 
 // Loop through the ringtones and create a labelled radio button for each
-files.onsuccess = function() {
+files.onsuccess = function () {
   var files = this.result;
   if (this.result) {
     if (files !== null && files.name.split('.').pop() === 'ogg') {
@@ -86,7 +87,7 @@ files.onsuccess = function() {
   }
 };
 
-files.onerror = function() {
+files.onerror = function () {
   document.getElementById('ogg').style.display = 'none';
 };
 
@@ -108,33 +109,30 @@ function radioButtonChangeHandler(e) {
 // pick a ringtone from us. We wait until we receive a system message
 // named 'activity' before we do anything. This message will give us
 // the Activity object we use to return a ringtone to the user
-
-navigator.mozSetMessageHandler('activity', function(activity) {
-
-  // These are the Cancel and Set buttons
-  var cancelButton = document.getElementById('cancel');
-  var setButton = document.getElementById('set');
+navigator.mozSetMessageHandler('activity', function (activity) {
 
   // If the user clicks Cancel, we terminate the activity with an error.
   // Calling postError() will make this app exit.
-  cancelButton.onclick = function() {
+  document.getElementById('cancel').addEventListener('click', function () {
+    player.stop();// Stop the ringtone
     activity.postError('canceled');
-  };
+  });
 
   // If the user clicks the Set button, we get the ringtone audio file
   // as a Blob and pass it and the ringtone name back to the invoking app.
-  setButton.onclick = function() {
+  document.getElementById('set').addEventListener('click', function () {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', selectedRadioButton.blob);
     xhr.responseType = 'blob'; // We want the result as a Blob.
     xhr.overrideMimeType(selectedRadioButton.mimetype); // Important! Set Blob type correctly.
     xhr.send();
-    xhr.onload = function() { // When we get the blob
+    xhr.onload = function () { // When we get the blob
+      player.stop();// Stop the ringtone
       activity.postResult({// We post it to the invoking app
         blob: xhr.response,
         name: selectedRadioButton.name
       });
     };
-  };
+  });
 
 });
